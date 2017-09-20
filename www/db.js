@@ -12,10 +12,10 @@ function Db() {
 
 	this.run = function(successCallback, errorCallback) {
 		var version = parseInt(mWebSql.version) || 0;
-		migrate(version + 1, successCallback, errorCallback);
+		this.migrate(version + 1, successCallback, errorCallback);
 	};
 
-	var migrate = function(step, successCallback, errorCallback) {
+	this.migrate = function(step, successCallback, errorCallback) {
 		if (mSteps[step]) {
 			mWebSql.changeVersion(mWebSql.version, String(step), function(t) {
 				mSteps[step](t);
@@ -24,7 +24,7 @@ function Db() {
 					errorCallback(error);
 				}
 			}, function() {
-				migrate(step + 1, successCallback, errorCallback);
+				this.migrate(step + 1, successCallback, errorCallback);
 			});
 		} else {
 			if (successCallback) {
