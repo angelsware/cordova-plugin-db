@@ -1,4 +1,5 @@
 function Db() {
+	var self = this;
 	var mWebSql = null;
 	var mSteps = [];
 
@@ -24,7 +25,7 @@ function Db() {
 					errorCallback(error);
 				}
 			}, function() {
-				this.migrate(step + 1, successCallback, errorCallback);
+				self.migrate(step + 1, successCallback, errorCallback);
 			});
 		} else {
 			if (successCallback) {
