@@ -13,7 +13,7 @@ function Db() {
 
 	this.run = function(successCallback, errorCallback) {
 		var version = parseInt(mWebSql.version) || 0;
-		this.migrate(version + 1, successCallback, errorCallback);
+		self.migrate(version + 1, successCallback, errorCallback);
 	};
 
 	this.migrate = function(step, successCallback, errorCallback) {
